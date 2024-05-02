@@ -1,0 +1,14 @@
+.drag-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: grab;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+.drag-div:hover {
+  background-color: #d1d5db;
+}

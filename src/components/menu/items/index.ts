@@ -7,3 +7,4 @@ export { Pomodoro as PomodoroItem } from './pomodoro';
 export { Presets as PresetsItem } from './presets';
 export { Shortcuts as ShortcutsItem } from './shortcuts';
 export { SleepTimer as SleepTimerItem } from './sleep-timer';
+export { Voyage as VoyageItem } from './voyage';

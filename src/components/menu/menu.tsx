@@ -14,12 +14,14 @@ import {
   PresetsItem,
   ShortcutsItem,
   SleepTimerItem,
+  VoyageItem,
 } from './items';
 import { Divider } from './divider';
 import { ShareLinkModal } from '@/components/modals/share-link';
 import { PresetsModal } from '@/components/modals/presets';
 import { ShortcutsModal } from '@/components/modals/shortcuts';
 import { SleepTimerModal } from '@/components/modals/sleep-timer';
+import { VoyageModal } from '@/components/modals/voyage';
 import { Notepad, Pomodoro } from '@/components/toolbox';
 import { fade, mix, slideY } from '@/lib/motion';
 import { useSoundStore } from '@/store';
@@ -41,6 +43,7 @@ export function Menu() {
       shareLink: false,
       shortcuts: false,
       sleepTimer: false,
+      voyage: false,
     }),
     [],
   );
@@ -70,6 +73,7 @@ export function Menu() {
   useHotkeys('shift+h', () => open('shortcuts'));
   useHotkeys('shift+s', () => open('shareLink'), { enabled: !noSelected });
   useHotkeys('shift+t', () => open('sleepTimer'));
+  useHotkeys('shift+v', () => open('voyage'))
 
   useCloseListener(closeAll);
 
@@ -106,6 +110,7 @@ export function Menu() {
                     <ShareItem open={() => open('shareLink')} />
                     <ShuffleItem />
                     <SleepTimerItem open={() => open('sleepTimer')} />
+                    <VoyageItem open={() => open('voyage')} />
 
                     <Divider />
                     <NotepadItem open={() => open('notepad')} />
@@ -143,6 +148,10 @@ export function Menu() {
       <SleepTimerModal
         show={modals.sleepTimer}
         onClose={() => close('sleepTimer')}
+      />
+      <VoyageModal
+        show={modals.voyage}
+        onClose={() => close('voyage')}
       />
     </>
   );

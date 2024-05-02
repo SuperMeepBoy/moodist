@@ -1,0 +1,16 @@
+.presetItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #d1d5db; /* Use your desired border color */
+  border-radius: 4px;
+}
+
+.presetItem span {
+  margin-left: 8px;
+}
+
+.presetItem:last-child {
+  margin-bottom: 0;
+}
