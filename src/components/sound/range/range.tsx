@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSoundStore } from '@/stores/sound';
 
 import styles from './range.module.css';
@@ -12,6 +13,20 @@ export function Range({ id, label }: RangeProps) {
   const volume = useSoundStore(state => state.sounds[id].volume);
   const isSelected = useSoundStore(state => state.sounds[id].isSelected);
   const locked = useSoundStore(state => state.locked);
+  const [showValueLabel, setShowValueLabel] = useState(false);
+  const [currentValue, setCurrentValue] = useState(volume * 100);
+
+  const handleClick = async () => {
+    setShowValueLabel(true);
+  };
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(e.target.value);
+    setCurrentValue(newValue);
+    if (!locked && isSelected) {
+      setVolume(id, newValue / 100);
+    }
+  };
 
   return (
     <>
@@ -19,6 +34,9 @@ export function Range({ id, label }: RangeProps) {
         className={styles.rangeLabel}
         htmlFor={`${id}-range`}
       >{`${label} sound volume`}</label>
+      {showValueLabel && (
+        <output className={styles.valueLabel}>{currentValue}</output>
+      )}
       <input
         autoComplete="off"
         className={styles.range}
@@ -28,10 +46,11 @@ export function Range({ id, label }: RangeProps) {
         min={0}
         type="range"
         value={volume * 100}
-        onClick={e => e.stopPropagation()}
-        onChange={e =>
-          !locked && isSelected && setVolume(id, Number(e.target.value) / 100)
-        }
+        onChange={handleValueChange}
+        onClick={e => {
+          e.stopPropagation();
+          handleClick();
+        }}
       />
     </>
   );
